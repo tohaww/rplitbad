@@ -33,22 +33,21 @@ jobs:
       - name: Build assets
         run: npm run build
       
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          # Folder project di lokal (root repository)
-          local-dir: ./
-          # Path relatif dari root FTP
-          server-dir: rplitbad/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.env
-            **/storage/**
-            **/vendor/**
-            **/.idea/**
-            **/.vscode/**
+      # FTP deployment disabled - using manual upload via cPanel File Manager
+      # - name: Deploy via FTP
+      #   uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     local-dir: ./
+      #     server-dir: rplitbad/
+      #     exclude: |
+      #       **/.git*
+      #       **/.git*/**
+      #       **/node_modules/**
+      #       **/.env
+      #       **/storage/**
+      #       **/vendor/**
+      #       **/.idea/**
+      #       **/.vscode/**
