@@ -83,7 +83,7 @@
     </div>
 
     <!-- Add Modal -->
-    <div id="addModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+    <div id="addModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-[1px]">
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <h2 class="mb-4 text-lg font-semibold text-gray-900">Tambah Kode Referensi</h2>
             <form action="{{ route('admin.kode-referensi.store') }}" method="POST">
@@ -136,7 +136,7 @@
     </div>
 
     <!-- Edit Modal -->
-    <div id="editModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+    <div id="editModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-[1px]">
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <h2 class="mb-4 text-lg font-semibold text-gray-900">Edit Kode Referensi</h2>
             <form id="editForm" method="POST">
