@@ -41,8 +41,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           # Folder project di lokal (root repository)
           local-dir: ./
-          # Path project di server berdasarkan dokumentasi
-          server-dir: /home/rplitbad/rplitbad/
+          # Path relatif dari root FTP
+          server-dir: rplitbad/
           exclude: |
             **/.git*
             **/.git*/**
