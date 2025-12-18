@@ -19,6 +19,8 @@
 /storage/*.key
 /storage/pail
 /vendor
+/actions-runner/
+/actions-runner-new/
 Homestead.json
 Homestead.yaml
 Thumbs.db
