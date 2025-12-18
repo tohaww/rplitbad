@@ -28,12 +28,17 @@
                 min-width: 256px !important;
                 max-width: 256px !important;
                 scrollbar-gutter: stable !important;
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                height: 100vh !important;
+                z-index: 10 !important;
             }
             aside > div:first-child {
-                width: 256px !important;
-                max-width: 256px !important;
-                min-width: 256px !important;
-                scrollbar-gutter: stable !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
             }
             aside nav,
             aside nav * {
@@ -44,6 +49,20 @@
             aside a {
                 max-width: 100% !important;
                 box-sizing: border-box !important;
+            }
+            /* Main content margin */
+            .main-content-wrapper {
+                margin-left: 256px !important;
+                width: calc(100% - 256px) !important;
+            }
+            @media (max-width: 1023px) {
+                .main-content-wrapper {
+                    margin-left: 0 !important;
+                    width: 100% !important;
+                }
+                aside {
+                    display: none !important;
+                }
             }
             /* Custom scrollbar that doesn't take space */
             aside::-webkit-scrollbar {
@@ -172,7 +191,7 @@
 
         <div class="flex min-h-screen">
             <!-- Sidebar -->
-            <aside class="hidden shrink-0 border-r border-gray-200 bg-gray-800 text-white lg:fixed lg:inset-y-0 lg:left-0 lg:z-10 lg:block lg:h-screen" style="width: 256px !important; min-width: 256px !important; max-width: 256px !important; box-sizing: border-box !important; overflow-y: auto !important; overflow-x: hidden !important; position: fixed !important; left: 0 !important; flex-shrink: 0 !important; scrollbar-gutter: stable !important;">
+            <aside class="hidden lg:block shrink-0 border-r border-gray-200 bg-gray-800 text-white" style="width: 256px !important; min-width: 256px !important; max-width: 256px !important; box-sizing: border-box !important; overflow-y: auto !important; overflow-x: hidden !important; position: fixed !important; left: 0 !important; top: 0 !important; height: 100vh !important; z-index: 10 !important; flex-shrink: 0 !important; scrollbar-gutter: stable !important;">
                 <div class="h-full" style="width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; padding-top: 2rem !important; padding-bottom: 2rem !important; flex-shrink: 0 !important;">
                 <div class="mb-8" style="width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;">
                     <div class="flex items-center gap-2" style="width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;">
@@ -370,7 +389,7 @@
             </aside>
 
             <!-- Main Content -->
-            <div class="flex flex-1 flex-col lg:ml-64 lg:pl-4">
+            <div class="main-content-wrapper flex flex-1 flex-col">
                 <!-- Header -->
                 <header class="sticky top-0 z-10 border-b border-gray-200 bg-white">
                     <div class="flex items-center justify-between px-4 py-4 lg:px-8">
