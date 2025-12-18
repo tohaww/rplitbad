@@ -35,7 +35,6 @@
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Nama</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Email</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Role</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Tanggal Dibuat</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Aksi</th>
                         </tr>
                     </thead>
@@ -49,9 +48,6 @@
                                     <span class="inline-flex rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">
                                         {{ ucfirst($user->role) }}
                                     </span>
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                    {{ $user->created_at->format('d/m/Y') }}
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 text-sm">
                                     <div class="flex items-center gap-2">
@@ -81,7 +77,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="px-6 py-8 text-center text-sm text-gray-500">
+                                <td colspan="5" class="px-6 py-8 text-center text-sm text-gray-500">
                                     Tidak ada data akun asesor
                                 </td>
                             </tr>
