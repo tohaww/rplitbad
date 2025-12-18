@@ -39,8 +39,11 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # Folder project di lokal (root repository)
           local-dir: ./
-          server-dir: /public_html/
+          # Folder tujuan di server, relatif dari root FTP (biasanya /home/rplitbad)
+          # Karena project kamu ada di /home/rplitbad/rplitbad, kita pakai /rplitbad/
+          server-dir: /rplitbad/
           exclude: |
             **/.git*
             **/.git*/**
@@ -50,20 +53,3 @@ jobs:
             **/vendor/**
             **/.idea/**
             **/.vscode/**
-      
-      - name: Run deployment commands on server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /path/to/your/project
-            php artisan config:clear
-            php artisan cache:clear
-            php artisan route:clear
-            php artisan view:clear
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
-
