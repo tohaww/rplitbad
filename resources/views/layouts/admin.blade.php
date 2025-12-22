@@ -61,7 +61,24 @@
                     width: 100% !important;
                 }
                 aside {
-                    display: none !important;
+                    transform: translateX(-100%) !important;
+                    transition: transform 0.3s ease-in-out !important;
+                }
+                aside.mobile-open {
+                    transform: translateX(0) !important;
+                }
+                .sidebar-overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.5);
+                    z-index: 9;
+                }
+                .sidebar-overlay.active {
+                    display: block !important;
                 }
             }
             /* Custom scrollbar that doesn't take space */
@@ -91,6 +108,38 @@
                     }
                 }
             }
+
+            function toggleMobileSidebar() {
+                const sidebar = document.getElementById('admin-sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                
+                if (sidebar) {
+                    sidebar.classList.toggle('mobile-open');
+                }
+                if (overlay) {
+                    overlay.classList.toggle('active');
+                }
+            }
+
+            function closeMobileSidebar() {
+                const sidebar = document.getElementById('admin-sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                
+                if (sidebar) {
+                    sidebar.classList.remove('mobile-open');
+                }
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+            }
+
+            // Close sidebar when clicking overlay
+            document.addEventListener('DOMContentLoaded', function() {
+                const overlay = document.getElementById('sidebar-overlay');
+                if (overlay) {
+                    overlay.addEventListener('click', closeMobileSidebar);
+                }
+            });
         </script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -190,10 +239,13 @@
         @endphp
 
         <div class="flex min-h-screen">
+            <!-- Sidebar Overlay (Mobile) -->
+            <div id="sidebar-overlay" class="sidebar-overlay"></div>
+            
             <!-- Sidebar -->
-            <aside class="hidden lg:block shrink-0 border-r border-gray-200 bg-gray-800 text-white" style="width: 256px !important; min-width: 256px !important; max-width: 256px !important; box-sizing: border-box !important; overflow-y: auto !important; overflow-x: hidden !important; position: fixed !important; left: 0 !important; top: 0 !important; height: 100vh !important; z-index: 10 !important; flex-shrink: 0 !important; scrollbar-gutter: stable !important;">
+            <aside id="admin-sidebar" class="lg:block shrink-0 border-r border-gray-200 bg-gray-800 text-white" style="width: 256px !important; min-width: 256px !important; max-width: 256px !important; box-sizing: border-box !important; overflow-y: auto !important; overflow-x: hidden !important; position: fixed !important; left: 0 !important; top: 0 !important; height: 100vh !important; z-index: 10 !important; flex-shrink: 0 !important; scrollbar-gutter: stable !important;">
                 <div class="h-full" style="width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; padding-top: 2rem !important; padding-bottom: 2rem !important; flex-shrink: 0 !important;">
-                <div class="mb-8" style="width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;">
+                <div class="mb-8 flex items-center justify-between" style="width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;">
                     <div class="flex items-center gap-2" style="width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;">
                         <div class="relative">
                             <img 
@@ -208,6 +260,11 @@
                         </div>
                         <span class="text-lg font-semibold">Sistem Rekognisi</span>
                     </div>
+                    <button onclick="closeMobileSidebar()" class="lg:hidden text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
                 <nav class="space-y-1" style="width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; box-sizing: border-box !important;">
@@ -274,6 +331,7 @@
                                         @endphp
                                         <a
                                             href="{{ route($submenu['route']) }}"
+                                            onclick="if(window.innerWidth < 1024) closeMobileSidebar();"
                                             class="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium transition
                                                 {{ $isSubmenuActive ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}"
                                         >
@@ -334,6 +392,7 @@
                         @else
                             <a
                                 href="{{ route($item['route']) }}"
+                                onclick="if(window.innerWidth < 1024) closeMobileSidebar();"
                                 class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition
                                     {{ $isActive ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}"
                             >
@@ -394,7 +453,7 @@
                 <header class="sticky top-0 z-10 border-b border-gray-200 bg-white">
                     <div class="flex items-center justify-between px-4 py-4 lg:px-8">
                         <div class="flex items-center gap-4">
-                            <button class="lg:hidden">
+                            <button onclick="toggleMobileSidebar()" class="lg:hidden">
                                 <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
