@@ -91,8 +91,9 @@
                                 name="kode_referensi"
                                 type="text"
                                 value="{{ old('kode_referensi') }}"
+                                required
                                 class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-[#1b1b18] focus:ring-2 focus:ring-[#f53003]/30"
-                                placeholder="Opsional"
+                                placeholder="Masukkan kode referensi"
                                 oninput="validateKodeReferensi(this.value)"
                             />
                         </div>
@@ -167,14 +168,14 @@
                 
                 kodeReferensiValue = value.trim();
                 
-                // Jika kosong, biarkan submit (karena opsional)
+                // Jika kosong, tampilkan error (karena required)
                 if (kodeReferensiValue === '') {
-                    statusSpan.textContent = '';
-                    statusSpan.className = 'text-xs';
-                    kodeReferensiInput.classList.remove('border-red-500', 'border-green-500');
-                    kodeReferensiInput.classList.add('border-gray-300');
-                    kodeReferensiValid = true;
-                    submitBtn.disabled = false;
+                    statusSpan.textContent = 'Kode referensi wajib diisi';
+                    statusSpan.className = 'text-xs text-[#f53003]';
+                    kodeReferensiInput.classList.remove('border-green-500', 'border-gray-300');
+                    kodeReferensiInput.classList.add('border-red-500');
+                    kodeReferensiValid = false;
+                    submitBtn.disabled = true;
                     return;
                 }
 
@@ -230,10 +231,10 @@
                 const kodeReferensiInput = document.getElementById('kode_referensi');
                 const value = kodeReferensiInput.value.trim();
                 
-                // If kode referensi is filled but not valid, prevent submission
-                if (value !== '' && !kodeReferensiValid) {
+                // If kode referensi is empty or not valid, prevent submission
+                if (value === '' || !kodeReferensiValid) {
                     e.preventDefault();
-                    alert('Kode referensi tidak valid. Silakan periksa kembali atau kosongkan field ini.');
+                    alert('Kode referensi wajib diisi dan harus valid.');
                     return false;
                 }
             });

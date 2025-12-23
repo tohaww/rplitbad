@@ -28,7 +28,7 @@ class RegisterController extends Controller
         $kodeReferensi = $request->input('kode_referensi');
         
         if (empty($kodeReferensi)) {
-            return response()->json(['valid' => true]); // Empty is allowed (optional)
+            return response()->json(['valid' => false]); // Empty is not allowed (required)
         }
 
         $exists = KodeReferensi::where('kode_referensi', $kodeReferensi)->exists();
@@ -47,11 +47,11 @@ class RegisterController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'confirmed', Password::defaults()],
                 'kode_referensi' => [
-                    'nullable',
+                    'required',
                     'string',
                     'max:255',
                     function ($attribute, $value, $fail) {
-                        if ($value && !KodeReferensi::where('kode_referensi', $value)->exists()) {
+                        if (!KodeReferensi::where('kode_referensi', $value)->exists()) {
                             $fail('Kode referensi yang Anda masukkan tidak valid.');
                         }
                     },
@@ -62,7 +62,7 @@ class RegisterController extends Controller
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
-                'kode_referensi' => $validated['kode_referensi'] ?? null,
+                'kode_referensi' => $validated['kode_referensi'],
                 'role' => 'mahasiswa', // Default role untuk user baru
             ]);
 
