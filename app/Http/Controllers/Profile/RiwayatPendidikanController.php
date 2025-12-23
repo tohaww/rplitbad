@@ -118,8 +118,10 @@ class RiwayatPendidikanController extends Controller
     public function download($id)
     {
         $user = Auth::user();
+        $mahasiswa = Mahasiswa::where('user_id', $user->id)->firstOrFail();
+        
         $riwayatPendidikan = RiwayatPendidikan::where('id', $id)
-            ->where('user_id', $user->id)
+            ->where('mahasiswa_id', $mahasiswa->id_mahasiswa)
             ->firstOrFail();
 
         if (!$riwayatPendidikan->file_path || !Storage::disk('public')->exists($riwayatPendidikan->file_path)) {

@@ -96,8 +96,10 @@ class PelatihanProfesionalController extends Controller
         ]);
 
         $user = Auth::user();
+        $mahasiswa = Mahasiswa::where('user_id', $user->id)->firstOrFail();
+        
         $pelatihanProfesional = PelatihanProfesional::where('id', $id)
-            ->where('user_id', $user->id)
+            ->where('mahasiswa_id', $mahasiswa->id_mahasiswa)
             ->firstOrFail();
 
         // Upload file
