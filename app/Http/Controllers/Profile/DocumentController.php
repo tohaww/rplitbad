@@ -131,6 +131,13 @@ class DocumentController extends Controller
             abort(404);
         }
 
-        return Storage::disk('public')->download($path);
+        $mime = Storage::disk('public')->mimeType($path) ?? 'application/octet-stream';
+        $absolutePath = Storage::disk('public')->path($path);
+        $filename = basename($path);
+
+        return response()->file($absolutePath, [
+            'Content-Type' => $mime,
+            'Content-Disposition' => 'inline; filename="' . $filename . '"',
+        ]);
     }
 }
