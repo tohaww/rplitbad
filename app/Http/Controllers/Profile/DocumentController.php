@@ -39,13 +39,13 @@ class DocumentController extends Controller
                 $rules = ['mimes:jpeg,jpg,png', 'max:10240']; // 10MB
                 break;
             case 'ktp':
-                $rules = ['mimes:pdf', 'max:10240']; // 10MB
+                $rules = ['mimes:jpeg,jpg,png', 'max:10240']; // 10MB
                 break;
             case 'kartu_keluarga':
-                $rules = ['mimes:pdf', 'max:20480']; // 20MB
+                $rules = ['mimes:jpeg,jpg,png', 'max:20480']; // 20MB
                 break;
             case 'akta_lahir':
-                $rules = ['mimes:pdf', 'max:10240']; // 10MB
+                $rules = ['mimes:jpeg,jpg,png', 'max:10240']; // 10MB
                 break;
         }
 
