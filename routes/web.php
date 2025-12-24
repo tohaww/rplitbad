@@ -20,15 +20,6 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/symlink', function () {
-    try {
-        \Illuminate\Support\Facades\Artisan::call('storage:link');
-        return 'Symlink created successfully.';
-    } catch (\Exception $e) {
-        return 'Error creating symlink: ' . $e->getMessage();
-    }
-});
-
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
