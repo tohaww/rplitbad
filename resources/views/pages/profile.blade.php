@@ -210,7 +210,7 @@
                                                     <p class="truncate text-gray-700">
                                                         <span class="font-semibold text-green-700">{{ $doc['status'] }}</span>
                                                         <br>
-                                                        <a href="{{ Storage::url($doc['file']) }}" target="_blank" class="text-blue-600 hover:underline">
+                                                        <a href="{{ route('documents.download', ['type' => $doc['field']]) }}" target="_blank" class="text-blue-600 hover:underline">
                                                             {{ basename($doc['file']) }}
                                                         </a>
                                                     </p>

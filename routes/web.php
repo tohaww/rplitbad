@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
 
     // Document routes (upload handled in profile page)
     Route::post('/upload-dokumen', [DocumentController::class, 'upload'])->name('documents.upload');
+    Route::get('/download-dokumen/{type}', [DocumentController::class, 'download'])->name('documents.download');
 
     // Identity routes
     Route::get('/lengkapi-identitas', [IdentityController::class, 'create'])->name('identity.create');

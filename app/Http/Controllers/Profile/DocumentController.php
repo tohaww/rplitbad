@@ -100,4 +100,37 @@ class DocumentController extends Controller
 
         return redirect()->route('profile')->with('success', 'Dokumen berhasil diupload!');
     }
+
+    /**
+     * Download stored document for current user by type.
+     */
+    public function download(Request $request, string $type)
+    {
+        $allowed = ['foto', 'ktp', 'kartu_keluarga', 'akta_lahir'];
+        if (!in_array($type, $allowed, true)) {
+            abort(404);
+        }
+
+        $user = $request->user();
+        $mahasiswa = Mahasiswa::where('user_id', $user->id)->firstOrFail();
+        $ktpKk = KtpKk::where('id_mahasiswa', $mahasiswa->id_mahasiswa)->first();
+
+        if (!$ktpKk) {
+            abort(404);
+        }
+
+        $map = [
+            'foto' => $ktpKk->foto,
+            'ktp' => $ktpKk->ktp,
+            'kartu_keluarga' => $ktpKk->kk,
+            'akta_lahir' => $ktpKk->akta,
+        ];
+
+        $path = $map[$type] ?? null;
+        if (!$path || !Storage::disk('public')->exists($path)) {
+            abort(404);
+        }
+
+        return Storage::disk('public')->download($path);
+    }
 }
