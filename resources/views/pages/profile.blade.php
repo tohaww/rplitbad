@@ -158,7 +158,7 @@
                         'status' => $ktpKk && !empty($ktpKk->foto) ? 'Sudah Upload' : 'Belum Upload',
                         'file' => $ktpKk && !empty($ktpKk->foto) ? $ktpKk->foto : null,
                         'format' => 'jpeg, jpg, png',
-                        'max_size' => '10MB',
+                        'max_size' => '5MB',
                         'field' => 'foto',
                     ],
                     'ktp' => [
@@ -166,7 +166,7 @@
                         'status' => $ktpKk && !empty($ktpKk->ktp) ? 'Sudah Upload' : 'Belum Upload',
                         'file' => $ktpKk && !empty($ktpKk->ktp) ? $ktpKk->ktp : null,
                         'format' => 'JPG',
-                        'max_size' => '10MB',
+                        'max_size' => '5MB',
                         'field' => 'ktp',
                     ],
                     'kartu_keluarga' => [
@@ -174,7 +174,7 @@
                         'status' => $ktpKk && !empty($ktpKk->kk) ? 'Sudah Upload' : 'Belum Upload',
                         'file' => $ktpKk && !empty($ktpKk->kk) ? $ktpKk->kk : null,
                         'format' => 'JPG',
-                        'max_size' => '20MB',
+                        'max_size' => '5MB',
                         'field' => 'kartu_keluarga',
                     ],
                     'akta_lahir' => [
@@ -182,7 +182,7 @@
                         'status' => $ktpKk && !empty($ktpKk->akta) ? 'Sudah Upload' : 'Belum Upload',
                         'file' => $ktpKk && !empty($ktpKk->akta) ? $ktpKk->akta : null,
                         'format' => 'JPG',
-                        'max_size' => '10MB',
+                        'max_size' => '5MB',
                         'field' => 'akta_lahir',
                     ],
                 ];
